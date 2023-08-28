@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15.2
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_DB: furniture_shop
+      POSTGRES_USER: shop_admin
+      POSTGRES_PASSWORD: ${SHOP_ADMIN_PASSWORD}
+
+    volumes:
+      - ./init_users.sql:/docker-entrypoint-initdb.d/init_users.sql
