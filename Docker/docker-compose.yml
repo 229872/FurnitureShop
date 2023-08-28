@@ -11,3 +11,4 @@ services:
 
     volumes:
       - ./init_users.sql:/docker-entrypoint-initdb.d/init_users.sql
+
