@@ -17,11 +17,11 @@ import java.time.LocalDateTime;
 @NamedQueries({
         @NamedQuery(
                 name = Account.FIND_BY_LOGIN,
-                query = "SELECT a FROM Account a WHERE a.login = ?"
+                query = "SELECT a FROM Account a WHERE a.login = ?1"
         ),
         @NamedQuery(
                 name = Account.FIND_BY_EMAIL,
-                query = "SELECT a FROM Account a WHERE a.email = ?"
+                query = "SELECT a FROM Account a WHERE a.email = ?1"
         )
 })
 public class Account extends AbstractEntity {

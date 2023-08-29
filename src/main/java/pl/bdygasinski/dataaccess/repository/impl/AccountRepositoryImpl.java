@@ -6,6 +6,8 @@ import jakarta.ejb.TransactionAttributeType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import pl.bdygasinski.dataaccess.entity.Account;
 import pl.bdygasinski.dataaccess.repository.AbstractRepository;
 import pl.bdygasinski.dataaccess.repository.api.AccountRepository;
@@ -19,6 +21,10 @@ public class AccountRepositoryImpl extends AbstractRepository<Account> implement
 
     @PersistenceContext(unitName = "account")
     private EntityManager entityManager;
+
+    public AccountRepositoryImpl() {
+        super(Account.class);
+    }
 
     @Override
     protected EntityManager getEntityManager() {

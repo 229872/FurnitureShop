@@ -11,7 +11,6 @@ import java.sql.Connection;
 @ApplicationScoped
 @DataSourceDefinitions({
 
-        //You have to set environment variables in your OS or in application server to have access to database.
         @DataSourceDefinition(
                 name = "java:app/init",
                 className = "org.postgresql.ds.PGSimpleDataSource",
@@ -19,7 +18,7 @@ import java.sql.Connection;
                 portNumber = 5555,
                 databaseName = "furniture_shop",
                 user = "shop_creator",
-                password = "${SHOP_CREATOR_PASSWORD}",
+                password = "dbcreator",
                 isolationLevel = Connection.TRANSACTION_READ_COMMITTED,
                 initialPoolSize = 1,
                 minPoolSize = 1,
@@ -33,7 +32,7 @@ import java.sql.Connection;
                 portNumber = 5555,
                 databaseName = "furniture_shop",
                 user = "shop_account_manager",
-                password = "${SHOP_ACCOUNT_MANAGER_PASSWORD}",
+                password = "dbaccountmanager",
                 isolationLevel = Connection.TRANSACTION_READ_COMMITTED,
                 initialPoolSize = 3,
                 minPoolSize = 2,

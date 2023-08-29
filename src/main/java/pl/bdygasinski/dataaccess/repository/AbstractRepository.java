@@ -48,7 +48,7 @@ public abstract class AbstractRepository <T extends AbstractEntity> implements R
         String tableName = clazz.getName();;
 
         return getEntityManager()
-                .createQuery("SELECT entity FROM %s entity".formatted(tableName), clazz)
+                .createQuery("SELECT entity FROM" + tableName + " entity", clazz)
                 .getResultList();
     }
 }
