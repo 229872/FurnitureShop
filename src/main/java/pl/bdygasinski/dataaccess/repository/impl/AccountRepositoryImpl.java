@@ -17,7 +17,7 @@ import java.util.Optional;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AccountRepositoryImpl extends AbstractRepository<Account> implements AccountRepository {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "account")
     private EntityManager entityManager;
 
     @Override
