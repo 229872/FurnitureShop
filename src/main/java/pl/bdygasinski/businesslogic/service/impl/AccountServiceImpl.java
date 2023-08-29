@@ -5,19 +5,22 @@ import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
 import jakarta.inject.Inject;
 import pl.bdygasinski.businesslogic.model.AccountDataForUpdate;
+import pl.bdygasinski.businesslogic.service.AbstractService;
 import pl.bdygasinski.businesslogic.service.api.AccountService;
 import pl.bdygasinski.dataaccess.entity.Account;
 import pl.bdygasinski.dataaccess.entity.Address;
 import pl.bdygasinski.dataaccess.entity.PersonalData;
+import pl.bdygasinski.dataaccess.entity.enums.AccountState;
 import pl.bdygasinski.dataaccess.repository.api.AccountRepository;
 import pl.bdygasinski.exception.ExceptionFactory;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public final class AccountServiceImpl implements AccountService {
+public final class AccountServiceImpl extends AbstractService implements AccountService {
 
     @Inject
     private AccountRepository accountRepository;
@@ -56,37 +59,60 @@ public final class AccountServiceImpl implements AccountService {
 
     @Override
     public Account block(Long id) {
-        return null;
+        Account account = accountRepository.findById(id)
+                .orElseThrow(ExceptionFactory::createAccountNotFoundException);
+
+        if (!account.getState().equals(AccountState.ACTIVE)) {
+            throw ExceptionFactory.createCantBlockNotActiveAccountException();
+        }
+
+        account.setState(AccountState.BLOCKED);
+        return accountRepository.save(account);
     }
 
     @Override
     public Account unblock(Long id) {
-        return null;
+        Account account = accountRepository.findById(id)
+                .orElseThrow(ExceptionFactory::createCantUnblockNotBlockedAccountException);
+
+        if (!account.getState().equals(AccountState.BLOCKED)) {
+            throw ExceptionFactory.createCantUnblockNotBlockedAccountException();
+        }
+
+        account.setState(AccountState.ACTIVE);
+        return accountRepository.save(account);
     }
 
     @Override
     public Account archive(Long id) {
-        return null;
+        Account account = accountRepository.findById(id)
+                .orElseThrow(ExceptionFactory::createCantUnblockNotBlockedAccountException);
+
+        account.setState(AccountState.ARCHIVAL);
+        return accountRepository.save(account);
     }
 
     @Override
     public Account findById(Long id) {
-        return null;
+        return accountRepository.findById(id)
+                .orElseThrow(ExceptionFactory::createAccountNotFoundException);
     }
 
     @Override
     public Account findByLogin(String login) {
-        return null;
+        return accountRepository.findByLogin(login)
+                .orElseThrow(ExceptionFactory::createAccountNotFoundException);
     }
 
     @Override
     public Account findByEmail(String email) {
-        return null;
+        return accountRepository.findByEmail(email)
+                .orElseThrow(ExceptionFactory::createAccountNotFoundException);
     }
 
     @Override
     public List<Account> findAll() {
-        return null;
+        return accountRepository.findAll();
     }
 
 }
