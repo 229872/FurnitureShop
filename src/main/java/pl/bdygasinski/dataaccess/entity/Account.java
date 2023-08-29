@@ -14,10 +14,25 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = Account.FIND_BY_LOGIN,
+                query = "SELECT a FROM Account a WHERE a.login = ?"
+        ),
+        @NamedQuery(
+                name = Account.FIND_BY_EMAIL,
+                query = "SELECT a FROM Account a WHERE a.email = ?"
+        )
+})
 public class Account extends AbstractEntity {
+    public static final String FIND_BY_LOGIN = "Account.findByLogin";
+    public static final String FIND_BY_EMAIL = "Account.findByEmail";
 
     @Column(nullable = false, updatable = false, unique = true)
     private String login;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private String password;

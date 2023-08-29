@@ -3,6 +3,7 @@ package pl.bdygasinski.dataaccess.repository;
 import jakarta.persistence.EntityManager;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.bdygasinski.dataaccess.entity.AbstractEntity;
 import pl.bdygasinski.dataaccess.repository.api.Repository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public abstract class AbstractRepository <T extends AbstractEntity> implements Repository<T> {
 
+    @Getter
     private Class<T> clazz;
 
     protected abstract EntityManager getEntityManager();
