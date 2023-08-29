@@ -3,7 +3,23 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
+    <persistence-unit name="init" transaction-type="JTA">
+        <description>Persistence unit for creating tables.</description>
+        <jta-data-source>java:app/init</jta-data-source>
+        <shared-cache-mode>NONE</shared-cache-mode>
 
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="account" transaction-type="JTA">
+        <description>Persistence unit for working with accounts.</description>
+        <jta-data-source>java:app/account</jta-data-source>
+        <shared-cache-mode>NONE</shared-cache-mode>
+
+        <properties>
+
+        </properties>
     </persistence-unit>
 </persistence>
