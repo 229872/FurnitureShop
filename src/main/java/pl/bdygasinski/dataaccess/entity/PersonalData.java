@@ -26,4 +26,5 @@ public class PersonalData extends AbstractEntity {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(nullable = false, updatable = false, unique = true)
     private Address address;
+
 }
