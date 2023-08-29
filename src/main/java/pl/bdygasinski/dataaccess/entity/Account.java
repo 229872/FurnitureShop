@@ -14,6 +14,11 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 
 @Entity
+@Table(indexes = {
+        // indexes for eventual migration to other database
+        @Index(name = "account_login_key", columnList = "login"),
+        @Index(name = "account_email_key", columnList = "email")
+})
 @NamedQueries({
         @NamedQuery(
                 name = Account.FIND_BY_LOGIN,
