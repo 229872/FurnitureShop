@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -34,5 +33,6 @@ public class AccountMetaData {
 
     @Column(columnDefinition = "int default 0 not null", name = "negative_auth_attempts")
     private Integer negativeAuthAttempts;
+
 
 }

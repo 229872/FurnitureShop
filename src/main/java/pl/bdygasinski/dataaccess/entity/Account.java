@@ -6,6 +6,7 @@ import pl.bdygasinski.dataaccess.entity.enums.AccountRole;
 import pl.bdygasinski.dataaccess.entity.enums.AccountState;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -59,7 +60,5 @@ public class Account extends AbstractEntity {
 
     @Embedded
     private AccountMetaData metaData;
-
-
 
 }

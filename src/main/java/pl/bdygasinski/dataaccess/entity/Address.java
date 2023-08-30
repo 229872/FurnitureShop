@@ -23,8 +23,9 @@ public class Address extends AbstractEntity {
     private String street;
 
     @Column(nullable = false)
-    private Integer streetNumber;
+    private Integer houseNumber;
 
     @Column(nullable = false)
     private String postalCode;
+
 }
